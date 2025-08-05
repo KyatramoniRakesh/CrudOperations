@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  margin: 0;
+  padding: 0;
+  /* height: 100vh; */
+}
+
+.form-container {
+  background: white;
+  width: 500px;
+  margin: 50px auto;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.8s ease forwards;
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.form-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.contact-form .form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contact-form label {
+  width: 100px;
+  font-weight: 600;
+  color: #444;
+}
+
+.contact-form input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.contact-form input:focus {
+  outline: none;
+  border-color: #7b2ff7;
+  box-shadow: 0 0 5px rgba(123, 47, 247, 0.4);
+  transform: scale(1.02);
+}
+
+.submit-btn {
+  padding: 12px;
+  background: linear-gradient(135deg, #7b2ff7, #f107a3);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  font-size: 16px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #6200ea, #d500f9);
+}
+
+
+
+
+
+/* table */
+
+.table-wrapper {
+  margin-top: 5rem;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  animation: fadeInTable 0.6s ease;
+}
+
+@keyframes fadeInTable {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.record-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Rubik', sans-serif;
+}
+
+.record-table th,
+.record-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  color: #444;
+}
+
+.record-table th {
+  background: #f5f7fb;
+  color: #333;
+}
+
+.record-table tr:hover {
+  background: #f0f4ff;
+}
+
+
+.btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.btns button{
+    font-size: 12px;
+
+}
+
+#edit{
+    background-color: darkcyan;
+}
+
+#del{
+    background-color: red;
+}
+
+
+/* to cancel edit button */
+.edit-mode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fffbe6;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ffc107;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.edit-indicator {
+  color: #856404;
+  font-weight: 500;
+}
+
+.cancel-edit-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-edit-btn:hover {
+  background-color: #c82333;
+}
+
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 10px;
+}
+
+input:invalid,
+input.error {
+    border-color: red;
+    margin-top: 0;
+}
+
+.error {
+    color: red;
+    font-size: 8px;
+    margin-top: 5px;
+}
+

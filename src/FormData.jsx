@@ -1,10 +1,12 @@
 import React from 'react';
 import './CSS/FormData.css';
 import { useState, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 
 const FormData = () => {
+
+    const navigat = useNavigate();
 
     const [formData, setformdata] = useState({
         name: '',
@@ -21,6 +23,8 @@ const FormData = () => {
     const [successMessage, setSuccessMessage] = useState('');
 
     const [errors, setErrors] = useState({});
+
+    const [searchName, setSearchName] = useState('');
 
 
 
@@ -78,6 +82,7 @@ const FormData = () => {
 
     };
 
+
     // to  EDIT
     const handleEdit = (index) => {
         const confirmEdit = window.alert("Do you want to Update this Record?")
@@ -102,6 +107,13 @@ const FormData = () => {
         const updatedRecords = records.filter((_, i) => i !== index);
         setRecords(updatedRecords);
     };
+
+    // TO SEARCH
+    const searchFilter = records.filter(record => {
+        const nameMatch = record.name.toLowerCase().includes(searchName.toLowerCase());
+        const emailMatch = record.email.toLowerCase().includes(searchName.toLowerCase());
+        return nameMatch || emailMatch;
+    });
 
 
 
@@ -152,15 +164,15 @@ const FormData = () => {
                         <label htmlFor="name">Name:</label>
                         <input id="name" type="text" value={formData.name} placeholder="Enter your name"
                             onChange={(e) => setformdata({ ...formData, name: e.target.value })} />
-                            
+
 
                     </div>{errors.name && <p className="error">{errors.name}</p>}
 
                     <div className="form-group">
                         <label htmlFor="mail">Email:</label>
                         <input id="mail" type="email" value={formData.email} placeholder="Enter your email"
-                            onChange={(e) => setformdata({ ...formData, email: e.target.value })}/>
-                           
+                            onChange={(e) => setformdata({ ...formData, email: e.target.value })} />
+
 
                     </div> {errors.email && <p className="error">{errors.email}</p>}
 
@@ -168,7 +180,7 @@ const FormData = () => {
                         <label htmlFor="number">Number:</label>
                         <input id="number" type="tel" value={formData.number} placeholder="Enter your number"
                             onChange={(e) => setformdata({ ...formData, number: e.target.value })} />
-                            
+
 
                     </div>{errors.number && <p className="error">{errors.number}</p>}
 
@@ -177,13 +189,23 @@ const FormData = () => {
                     </button>
                 </form>
             </div>
+            <button onClick={() => navigate('/table')} className="view-records-btn">
+                📋 View All Records
+            </button>
 
             {/* TABLE TO SHOW DATA */}
 
-            {records.length > 0 && (
-
+            {searchFilter.length > 0 ? (
                 <div className='table-wrapper'>
                     <h3>Submitted Records</h3>
+
+                    <input
+                        type="text"
+                        placeholder='Search by Name or Email'
+                        value={searchName}
+                        className='search-input'
+                        onChange={(e) => setSearchName(e.target.value)}
+                    />
 
                     <table className="record-table">
                         <thead>
@@ -193,12 +215,10 @@ const FormData = () => {
                                 <th>Email</th>
                                 <th>Number</th>
                                 <th>Actions</th>
-
                             </tr>
                         </thead>
-
                         <tbody>
-                            {records.map((record, index) => (
+                            {searchFilter.map((record, index) => (
                                 <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{record.name}</td>
@@ -211,12 +231,41 @@ const FormData = () => {
                                 </tr>
                             ))}
                         </tbody>
+                    </table>
+                </div>
+            ) : (
+                <div className='table-wrapper'>
+                    <h3>Submitted Records</h3>
 
+                    <input
+                        type="text"
+                        placeholder='Search by Name or Email'
+                        value={searchName}
+                        className='search-input'
+                        onChange={(e) => setSearchName(e.target.value)}
+                    />
 
-
+                    <table className="record-table">
+                        <thead>
+                            <tr>
+                                <th>SR. No</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Number</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colSpan="5" style={{ textAlign: "center", color: "red" }}>
+                                    No matching user found.
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             )}
+
 
 
 
